@@ -95,9 +95,14 @@ export const SearchPage: React.FC = () => {
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
                 <div>
-                  <CardTitle className="text-2xl font-bold">
-                    {mockResult.word}
-                  </CardTitle>
+                  <div className="flex items-center space-x-3">
+                    <CardTitle className="text-2xl font-bold">
+                      {mockResult.word}
+                    </CardTitle>
+                    <Badge variant="secondary" className="text-sm">
+                      {mockResult.partOfSpeech}
+                    </Badge>
+                  </div>
                   <div className="flex items-center space-x-3 mt-1">
                     <span className="text-muted-foreground font-mono">
                       {mockResult.pronunciation}
@@ -121,11 +126,8 @@ export const SearchPage: React.FC = () => {
           </CardHeader>
 
           <CardContent className="space-y-6">
-            {/* Part of Speech & Definition */}
+            {/* Definition */}
             <div className="space-y-3">
-              <Badge variant="secondary" className="text-sm">
-                {mockResult.partOfSpeech}
-              </Badge>
               <div>
                 <h3 className="font-semibold text-lg mb-2">中文释义</h3>
                 <p className="text-lg leading-relaxed bg-muted/50 p-4 rounded-lg">
