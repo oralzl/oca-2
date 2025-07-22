@@ -12,10 +12,8 @@ export const AppLayout: React.FC = () => {
   const [searchParams] = useSearchParams();
   const isMobile = useIsMobile();
   
-  // Check if we're on search page with mobile toolbar visible
-  const isSearchPageWithResults = location.pathname === '/search' && 
-    (searchParams.get('q') || document.querySelector('[data-mobile-search-toolbar]'));
-  const shouldHideBottomNav = isMobile && isSearchPageWithResults;
+  // Hide bottom nav on mobile search results page
+  const shouldHideBottomNav = isMobile && location.pathname === '/search';
 
   return (
     <SidebarProvider>
