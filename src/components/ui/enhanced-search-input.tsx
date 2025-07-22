@@ -192,14 +192,14 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
               "absolute right-4 top-1/2 transform -translate-y-1/2",
               "w-8 h-8 flex items-center justify-center",
               "transition-all duration-150",
-              "disabled:opacity-50 disabled:cursor-not-allowed",
-              "hover:scale-110 active:scale-95"
+              !disabled && "hover:scale-110 active:scale-95",
+              disabled ? "cursor-not-allowed" : ""
             )}
           >
             {disabled ? (
-              // 8bit pixel style loading animation
-              <div className="relative w-6 h-6 animate-pulse">
-                <div className="absolute inset-0 grid grid-cols-3 gap-[1px]">
+              // 8bit pixel style loading animation - positioned to avoid parent opacity
+              <div className="relative w-6 h-6 z-50">
+                <div className="absolute inset-0 grid grid-cols-3 gap-[1px] opacity-100">
                   {/* Create 9 pixel blocks in 3x3 grid */}
                   {Array.from({ length: 9 }).map((_, i) => (
                     <div
@@ -218,7 +218,7 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
                   ))}
                 </div>
                 {/* Outer glow effect */}
-                <div className="absolute inset-0 bg-blue-500/20 blur-sm animate-[pulse_2s_ease-in-out_infinite]" />
+                <div className="absolute inset-0 bg-blue-500/20 blur-sm animate-[pulse_2s_ease-in-out_infinite] opacity-100" />
               </div>
             ) : (
               <Search 
