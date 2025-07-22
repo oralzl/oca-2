@@ -76,7 +76,7 @@ export const SearchPage: React.FC = () => {
       <div className="space-y-6">
         <EnhancedSearchInput
           value={searchTerm}
-          onChange={setSearchTerm}
+          onChange={(value) => setSearchTerm(value)}
           onKeyPress={handleKeyPress}
           placeholder="输入英文单词..."
           disabled={isSearching}
