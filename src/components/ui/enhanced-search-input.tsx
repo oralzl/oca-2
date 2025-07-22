@@ -147,9 +147,10 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
           isFocused 
             ? "border-primary shadow-[0_0_40px_-12px_hsl(var(--primary))]" 
             : "border-border/20 hover:border-border/40",
-          disabled && "opacity-50 cursor-not-allowed"
+          disabled && "cursor-not-allowed"
         )}
         onClick={handleContainerClick}
+        style={{ opacity: disabled ? 0.5 : 1 }}
       >
         {/* Animated background glow */}
         <div className={cn(
@@ -185,51 +186,57 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
         
         {/* Search Button */}
         {onSearch && (
-          <button
-            onClick={onSearch}
-            disabled={disabled}
-            className={cn(
-              "absolute right-4 top-1/2 transform -translate-y-1/2",
-              "w-8 h-8 flex items-center justify-center",
-              "transition-all duration-150",
-              !disabled && "hover:scale-110 active:scale-95",
-              disabled ? "cursor-not-allowed" : ""
-            )}
-          >
-            {disabled ? (
-              // 8bit pixel style loading animation - positioned to avoid parent opacity
-              <div className="relative w-6 h-6 z-50">
-                <div className="absolute inset-0 grid grid-cols-3 gap-[1px] opacity-100">
-                  {/* Create 9 pixel blocks in 3x3 grid */}
-                  {Array.from({ length: 9 }).map((_, i) => (
-                    <div
-                      key={i}
-                      className={cn(
-                        "w-[6px] h-[6px] transition-all duration-300",
-                        // Create breathing pattern with different delays
-                        i === 4 ? "bg-blue-500 animate-[pulse_1s_ease-in-out_infinite]" : // center
-                        [1, 3, 5, 7].includes(i) ? "bg-blue-400 animate-[pulse_1.2s_ease-in-out_infinite_0.1s]" : // cross
-                        "bg-blue-300 animate-[pulse_1.4s_ease-in-out_infinite_0.2s]" // corners
-                      )}
-                      style={{
-                        animationDelay: `${(i % 3) * 0.1}s`,
-                      }}
-                    />
-                  ))}
+          <>
+            <button
+              onClick={onSearch}
+              disabled={disabled}
+              className={cn(
+                "absolute right-4 top-1/2 transform -translate-y-1/2",
+                "w-8 h-8 flex items-center justify-center",
+                "transition-all duration-150",
+                !disabled && "hover:scale-110 active:scale-95",
+                disabled ? "cursor-not-allowed" : ""
+              )}
+            >
+              {!disabled && (
+                <Search 
+                  className="w-6 h-6 text-blue-500" 
+                  strokeWidth={3}
+                  style={{
+                    filter: 'drop-shadow(1px 1px 0px rgba(59, 130, 246, 0.3))'
+                  }}
+                />
+              )}
+            </button>
+            
+            {/* Loading Animation - positioned outside the opacity-affected container */}
+            {disabled && (
+              <div className="absolute right-4 top-1/2 transform -translate-y-1/2 z-50 opacity-100">
+                <div className="relative w-6 h-6">
+                  <div className="absolute inset-0 grid grid-cols-3 gap-[1px]">
+                    {/* Create 9 pixel blocks in 3x3 grid */}
+                    {Array.from({ length: 9 }).map((_, i) => (
+                      <div
+                        key={i}
+                        className={cn(
+                          "w-[6px] h-[6px] transition-all duration-300",
+                          // Create breathing pattern with different delays
+                          i === 4 ? "bg-blue-500 animate-[pulse_1s_ease-in-out_infinite]" : // center
+                          [1, 3, 5, 7].includes(i) ? "bg-blue-400 animate-[pulse_1.2s_ease-in-out_infinite_0.1s]" : // cross
+                          "bg-blue-300 animate-[pulse_1.4s_ease-in-out_infinite_0.2s]" // corners
+                        )}
+                        style={{
+                          animationDelay: `${(i % 3) * 0.1}s`,
+                        }}
+                      />
+                    ))}
+                  </div>
+                  {/* Outer glow effect */}
+                  <div className="absolute inset-0 bg-blue-500/20 blur-sm animate-[pulse_2s_ease-in-out_infinite]" />
                 </div>
-                {/* Outer glow effect */}
-                <div className="absolute inset-0 bg-blue-500/20 blur-sm animate-[pulse_2s_ease-in-out_infinite] opacity-100" />
               </div>
-            ) : (
-              <Search 
-                className="w-6 h-6 text-blue-500" 
-                strokeWidth={3}
-                style={{
-                  filter: 'drop-shadow(1px 1px 0px rgba(59, 130, 246, 0.3))'
-                }}
-              />
             )}
-          </button>
+          </>
         )}
         
         {/* Scanning line effect */}
