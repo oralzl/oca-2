@@ -129,7 +129,7 @@ export const SearchPage: React.FC = () => {
             {/* Definition */}
             <div className="space-y-3">
               <div>
-                <h3 className="font-semibold text-lg mb-2">中文释义</h3>
+                <h3 className="font-semibold text-lg mb-2">释义</h3>
                 <p className="text-lg leading-relaxed bg-muted/50 p-4 rounded-lg">
                   {mockResult.definition}
                 </p>
