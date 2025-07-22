@@ -196,11 +196,28 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
               "hover:scale-110 active:scale-95"
             )}
           >
-            <Search 
-              className="w-6 h-6 text-blue-500" 
-              strokeWidth={3}
+            {/* 8bit Pixel Art Search Icon */}
+            <div 
+              className="w-5 h-5 relative"
               style={{
-                filter: 'drop-shadow(1px 1px 0px rgba(59, 130, 246, 0.3))'
+                imageRendering: 'pixelated',
+                background: `
+                  conic-gradient(from 0deg at 50% 50%, 
+                    transparent 0deg, transparent 45deg,
+                    #3b82f6 45deg, #3b82f6 135deg,
+                    transparent 135deg, transparent 180deg,
+                    #3b82f6 180deg, #3b82f6 225deg,
+                    transparent 225deg, transparent 360deg
+                  ),
+                  radial-gradient(circle at 40% 40%, 
+                    transparent 30%, 
+                    #3b82f6 30%, #3b82f6 35%, 
+                    transparent 35%, transparent 70%,
+                    #3b82f6 70%, #3b82f6 75%,
+                    transparent 75%
+                  )
+                `,
+                transform: 'rotate(45deg)'
               }}
             />
           </button>
