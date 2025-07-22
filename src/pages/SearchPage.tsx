@@ -65,7 +65,7 @@ export const SearchPage: React.FC = () => {
   };
 
   return (
-    <div className={`max-w-4xl mx-auto space-y-8 ${!hasSearched ? 'h-screen flex flex-col justify-center' : ''}`}>
+    <div className={`max-w-4xl mx-auto space-y-8 p-4 ${!hasSearched ? 'h-full flex flex-col justify-center' : ''}`}>
       {/* Search Header */}
       <div className="text-center space-y-4">
         <h1 className="text-3xl font-bold text-gradient">智能单词查询</h1>

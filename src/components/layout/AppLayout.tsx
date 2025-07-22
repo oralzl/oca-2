@@ -9,12 +9,12 @@ import { BottomNavigation } from './BottomNavigation';
 export const AppLayout: React.FC = () => {
   return (
     <SidebarProvider>
-      <div className="min-h-screen bg-gradient-surface flex w-full">
+      <div className="h-screen bg-gradient-surface flex w-full overflow-hidden">
         {/* Desktop Sidebar */}
         <AppSidebar className="hidden md:flex" />
         
         {/* Main Content */}
-        <main className="flex-1 container mx-auto px-4 py-8 md:py-8 pb-20 md:pb-8">
+        <main className="flex-1 flex flex-col overflow-y-auto px-4">
           <Outlet />
         </main>
         
