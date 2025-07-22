@@ -31,33 +31,46 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
     
     // Only play sound when length increases (typing) and not on initial load or deletion
     if (currentLength > previousLength && currentLength > 0 && !disabled) {
-      const createKeySound = () => {
+      const createKeySound = async () => {
         try {
           if (typeof window !== 'undefined' && (window.AudioContext || (window as any).webkitAudioContext)) {
+            console.log('Creating audio context for typing sound');
             const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+            
+            // Resume audio context if suspended (required for user interaction)
+            if (audioContext.state === 'suspended') {
+              await audioContext.resume();
+              console.log('Audio context resumed');
+            }
+            
             const oscillator = audioContext.createOscillator();
             const gainNode = audioContext.createGain();
             
             oscillator.connect(gainNode);
             gainNode.connect(audioContext.destination);
             
-            oscillator.frequency.value = 800 + Math.random() * 200; // Random mechanical frequency
+            // More noticeable mechanical sound
+            oscillator.frequency.value = 1200 + Math.random() * 400; // Higher frequency for mechanical sound
             oscillator.type = 'square';
             
-            gainNode.gain.setValueAtTime(0.05, audioContext.currentTime);
-            gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.08);
+            // Increased volume for better audibility
+            gainNode.gain.setValueAtTime(0.15, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.1);
             
             oscillator.start(audioContext.currentTime);
-            oscillator.stop(audioContext.currentTime + 0.08);
+            oscillator.stop(audioContext.currentTime + 0.1);
+            
+            console.log('Typing sound played successfully');
             
             // Close audio context after use to prevent memory leaks
             setTimeout(() => {
               audioContext.close();
-            }, 100);
+            }, 150);
+          } else {
+            console.log('AudioContext not available');
           }
         } catch (e) {
-          // Silently handle audio errors
-          console.log('Audio not available');
+          console.error('Audio error:', e);
         }
       };
       
