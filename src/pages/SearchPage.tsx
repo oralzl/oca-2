@@ -74,6 +74,7 @@ export const SearchPage: React.FC = () => {
     // Simulate API call
     setTimeout(() => {
       setIsSearching(false);
+      setSearchTerm(''); // Clear search input after search completion
     }, 1500);
   };
 
