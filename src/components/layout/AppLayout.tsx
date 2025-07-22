@@ -12,8 +12,8 @@ export const AppLayout: React.FC = () => {
   const [searchParams] = useSearchParams();
   const isMobile = useIsMobile();
   
-  // Hide bottom nav on mobile word detail page
-  const shouldHideBottomNav = isMobile && location.pathname.startsWith('/word/');
+  // Hide bottom nav on mobile search results page
+  const shouldHideBottomNav = isMobile && location.pathname === '/search';
 
   return (
     <SidebarProvider>
@@ -26,7 +26,7 @@ export const AppLayout: React.FC = () => {
           <Outlet />
         </main>
         
-        {/* Mobile Bottom Navigation - Hidden on word detail pages */}
+        {/* Mobile Bottom Navigation - Hidden on search results */}
         {!shouldHideBottomNav && <BottomNavigation className="md:hidden" />}
         
         <Toaster />
