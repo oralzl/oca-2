@@ -176,8 +176,8 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
           disabled={disabled}
           maxLength={maxLength}
           className={cn(
-            "w-full h-20 pl-16 pr-8 bg-transparent text-2xl font-medium",
-            "placeholder:text-muted-foreground/60 text-center",
+            "w-full h-20 pl-16 pr-16 bg-transparent text-2xl font-medium text-center",
+            "placeholder:text-muted-foreground/60",
             "focus:outline-none transition-all duration-300",
             "disabled:opacity-50 disabled:cursor-not-allowed",
             isFocused && "text-foreground placeholder:text-muted-foreground/40"
