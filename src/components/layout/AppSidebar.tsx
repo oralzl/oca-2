@@ -43,7 +43,7 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({
               {navigation.map(item => {
               const Icon = item.icon;
               return <SidebarMenuItem key={item.name}>
-                    <SidebarMenuButton asChild className={cn("w-full justify-start space-x-4 px-6 py-4 rounded-xl transition-all text-base", isActive(item.href) ? "bg-gradient-primary text-white shadow-glow" : "hover:bg-muted")}>
+                    <SidebarMenuButton asChild className={cn("w-full justify-start space-x-4 px-6 py-5 rounded-lg transition-all text-base", isActive(item.href) ? "bg-gradient-primary text-white shadow-glow" : "hover:bg-muted")}>
                       <Link to={item.href}>
                         <Icon className="w-6 h-6" />
                         <span className="font-semibold">{item.name}</span>
@@ -57,7 +57,7 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({
 
         {/* User Profile */}
         <div className="mt-auto p-6 border-t border-border/50">
-          <SidebarMenuButton className="w-full justify-start space-x-4 px-6 py-4 rounded-xl hover:bg-muted text-base">
+          <SidebarMenuButton className="w-full justify-start space-x-4 px-6 py-5 rounded-lg hover:bg-muted text-base">
             <User className="w-6 h-6" />
             <div className="flex flex-col items-start">
               <span className="font-semibold">用户账户</span>
