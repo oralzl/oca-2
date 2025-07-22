@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+import { EnhancedSearchInput } from "@/components/ui/enhanced-search-input";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { 
@@ -72,38 +72,34 @@ export const SearchPage: React.FC = () => {
         </p>
       </div>
 
-      {/* Search Form */}
-      <Card className="shadow-soft border-0">
-        <CardContent className="p-6">
-          <div className="flex gap-3">
-            <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
-              <Input
-                placeholder="输入英文单词..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                onKeyPress={handleKeyPress}
-                className="pl-10 h-12 text-lg"
-                disabled={isSearching}
-              />
-            </div>
-            <Button 
-              onClick={handleSearch}
-              disabled={isSearching || !searchTerm.trim()}
-              className="h-12 px-6 bg-gradient-primary text-white hover-glow"
-            >
-              {isSearching ? (
-                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-              ) : (
-                <>
-                  <Search className="w-5 h-5 mr-2" />
-                  查询
-                </>
-              )}
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+      {/* Enhanced Search Form */}
+      <div className="space-y-6">
+        <EnhancedSearchInput
+          value={searchTerm}
+          onChange={setSearchTerm}
+          onKeyPress={handleKeyPress}
+          placeholder="输入英文单词..."
+          disabled={isSearching}
+          className="w-full max-w-2xl mx-auto"
+        />
+        
+        <div className="flex justify-center">
+          <Button 
+            onClick={handleSearch}
+            disabled={isSearching || !searchTerm.trim()}
+            className="h-14 px-8 text-lg bg-gradient-primary text-white hover-glow rounded-xl shadow-lg"
+          >
+            {isSearching ? (
+              <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
+            ) : (
+              <>
+                <Search className="w-6 h-6 mr-3" />
+                智能查询
+              </>
+            )}
+          </Button>
+        </div>
+      </div>
 
       {/* Search Result */}
       {searchTerm && !isSearching && (
