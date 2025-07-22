@@ -22,7 +22,7 @@ export const FavoritesPage: React.FC = () => {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
 
   const handleWordClick = (word: string) => {
-    navigate(`/search?q=${encodeURIComponent(word)}`);
+    navigate(`/search?q=${encodeURIComponent(word)}&from=favorites`);
   };
   
   // Mock favorites data

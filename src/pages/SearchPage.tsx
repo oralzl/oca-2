@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { EnhancedSearchInput } from "@/components/ui/enhanced-search-input";
@@ -23,6 +23,7 @@ import {
 
 export const SearchPage: React.FC = () => {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [isSearching, setIsSearching] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
@@ -50,8 +51,13 @@ export const SearchPage: React.FC = () => {
   }, []);
 
   const handleBack = () => {
-    setHasSearched(false);
-    setSearchTerm('');
+    const fromParam = searchParams.get('from');
+    if (fromParam === 'favorites') {
+      navigate('/favorites');
+    } else {
+      setHasSearched(false);
+      setSearchTerm('');
+    }
   };
   
   // Mock search result for demonstration
