@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { Search, Star, User } from 'lucide-react';
 import { cn } from "@/lib/utils";
 
@@ -15,7 +15,15 @@ interface BottomNavigationProps {
 
 export const BottomNavigation: React.FC<BottomNavigationProps> = ({ className }) => {
   const location = useLocation();
-  const isActive = (path: string) => location.pathname === path;
+  const [searchParams] = useSearchParams();
+  
+  const isActive = (path: string) => {
+    // 如果当前在搜索页面且来源是收藏页面，则收藏应该保持激活状态
+    if (location.pathname === '/search' && searchParams.get('from') === 'favorites') {
+      return path === '/favorites';
+    }
+    return location.pathname === path;
+  };
 
   return (
     <nav className={cn(
