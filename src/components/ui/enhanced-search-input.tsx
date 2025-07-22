@@ -211,19 +211,21 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
             
             {/* Loading Animation - positioned outside the opacity-affected container */}
             {disabled && (
-              <div className="absolute right-4 top-1/2 transform -translate-y-1/2 z-50 opacity-100">
+              <div className="absolute right-4 top-1/2 transform -translate-y-1/2 z-[9999] pointer-events-none">
+                {/* Background circle for better visibility */}
+                <div className="absolute inset-0 w-8 h-8 bg-white rounded-full shadow-lg border-2 border-gray-200 -translate-x-1 -translate-y-1"></div>
                 <div className="relative w-6 h-6">
                   <div className="absolute inset-0 grid grid-cols-3 gap-[1px]">
-                    {/* Create 9 pixel blocks in 3x3 grid */}
+                    {/* Create 9 pixel blocks in 3x3 grid with high contrast colors */}
                     {Array.from({ length: 9 }).map((_, i) => (
                       <div
                         key={i}
                         className={cn(
-                          "w-[6px] h-[6px] transition-all duration-300",
-                          // Create breathing pattern with different delays
-                          i === 4 ? "bg-blue-500 animate-[pulse_1s_ease-in-out_infinite]" : // center
-                          [1, 3, 5, 7].includes(i) ? "bg-blue-400 animate-[pulse_1.2s_ease-in-out_infinite_0.1s]" : // cross
-                          "bg-blue-300 animate-[pulse_1.4s_ease-in-out_infinite_0.2s]" // corners
+                          "w-[6px] h-[6px] transition-all duration-300 rounded-[1px]",
+                          // Create breathing pattern with different delays and high contrast colors
+                          i === 4 ? "bg-blue-600 animate-[pulse_1s_ease-in-out_infinite] shadow-sm" : // center - darker blue
+                          [1, 3, 5, 7].includes(i) ? "bg-blue-500 animate-[pulse_1.2s_ease-in-out_infinite_0.1s] shadow-sm" : // cross
+                          "bg-blue-400 animate-[pulse_1.4s_ease-in-out_infinite_0.2s] shadow-sm" // corners
                         )}
                         style={{
                           animationDelay: `${(i % 3) * 0.1}s`,
@@ -231,8 +233,8 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
                       />
                     ))}
                   </div>
-                  {/* Outer glow effect */}
-                  <div className="absolute inset-0 bg-blue-500/20 blur-sm animate-[pulse_2s_ease-in-out_infinite]" />
+                  {/* Stronger glow effect */}
+                  <div className="absolute inset-0 bg-blue-600/30 blur-sm animate-[pulse_2s_ease-in-out_infinite] rounded-full" />
                 </div>
               </div>
             )}
