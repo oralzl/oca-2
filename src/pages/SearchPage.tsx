@@ -67,12 +67,14 @@ export const SearchPage: React.FC = () => {
   return (
     <div className={`w-full max-w-2xl mx-auto space-y-8 p-4 ${!hasSearched ? 'h-full flex flex-col justify-center' : 'pt-8'}`}>
       {/* Search Header */}
-      <div className="text-center space-y-4">
-        <h1 className="text-3xl font-bold text-gradient">智能单词查询</h1>
-        <p className="text-muted-foreground">
-          输入任何英文单词，获得AI驱动的深度解释
-        </p>
-      </div>
+      {!isSearching && !hasSearched && (
+        <div className="text-center space-y-4">
+          <h1 className="text-3xl font-bold text-gradient">智能单词查询</h1>
+          <p className="text-muted-foreground">
+            输入任何英文单词，获得AI驱动的深度解释
+          </p>
+        </div>
+      )}
 
       {/* Enhanced Search Form */}
       <div className="space-y-6 w-full">
