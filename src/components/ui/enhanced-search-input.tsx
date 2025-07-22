@@ -138,7 +138,7 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
   };
 
   return (
-    <div className={cn("relative group", className)}>
+    <div className={cn("relative group w-full max-w-md mx-auto", className)}>
       {/* Main Input Container */}
       <div 
         className={cn(
