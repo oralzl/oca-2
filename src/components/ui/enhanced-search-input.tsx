@@ -138,12 +138,12 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
   };
 
   return (
-    <div className={cn("relative group w-full min-w-[320px] max-w-2xl mx-auto", className)}>
+    <div className={cn("relative group w-full", className)}>
       {/* Main Input Container */}
       <div 
         className={cn(
           "relative border-2 transition-all duration-500 bg-card/50 backdrop-blur-sm cursor-text",
-          "rounded-2xl overflow-hidden w-full min-w-[480px]",
+          "rounded-2xl overflow-hidden w-full",
           isFocused 
             ? "border-primary shadow-[0_0_40px_-12px_hsl(var(--primary))]" 
             : "border-border/20 hover:border-border/40",
@@ -171,7 +171,7 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
           disabled={disabled}
           maxLength={maxLength}
           className={cn(
-            "w-full h-20 px-4 bg-transparent text-2xl font-medium text-center min-w-[480px]",
+            "w-full h-20 px-4 bg-transparent text-2xl font-medium text-center",
             "placeholder:text-muted-foreground/60",
             "focus:outline-none transition-all duration-300",
             "disabled:opacity-50 disabled:cursor-not-allowed",
