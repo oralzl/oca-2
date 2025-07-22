@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -16,8 +17,13 @@ import {
 } from 'lucide-react';
 
 export const FavoritesPage: React.FC = () => {
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+
+  const handleWordClick = (word: string) => {
+    navigate(`/search?q=${encodeURIComponent(word)}`);
+  };
   
   // Mock favorites data
   const mockFavorites = [
@@ -77,7 +83,7 @@ export const FavoritesPage: React.FC = () => {
   );
 
   const FavoriteCard = ({ favorite }: { favorite: typeof mockFavorites[0] }) => (
-    <Card className="hover-lift hover-glow transition-all duration-300 border-0 shadow-soft">
+    <Card className="hover-lift hover-glow transition-all duration-300 border-0 shadow-soft cursor-pointer" onClick={() => handleWordClick(favorite.word)}>
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
           <div className="space-y-1">
@@ -117,7 +123,7 @@ export const FavoritesPage: React.FC = () => {
   );
 
   const FavoriteListItem = ({ favorite }: { favorite: typeof mockFavorites[0] }) => (
-    <Card className="hover:bg-muted/50 transition-colors border-0">
+    <Card className="hover:bg-muted/50 transition-colors border-0 cursor-pointer" onClick={() => handleWordClick(favorite.word)}>
       <CardContent className="p-4">
         <div className="flex items-center justify-between">
           <div className="flex-1 space-y-1">
