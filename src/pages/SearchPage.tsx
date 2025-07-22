@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { EnhancedSearchInput } from "@/components/ui/enhanced-search-input";
@@ -21,10 +22,20 @@ import {
 } from 'lucide-react';
 
 export const SearchPage: React.FC = () => {
+  const [searchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState('');
   const [isSearching, setIsSearching] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
+
+  // Check URL params for search term
+  useEffect(() => {
+    const queryParam = searchParams.get('q');
+    if (queryParam) {
+      setSearchTerm(queryParam);
+      handleSearchWithTerm(queryParam);
+    }
+  }, [searchParams]);
 
   // Check if desktop
   useEffect(() => {
@@ -66,8 +77,8 @@ export const SearchPage: React.FC = () => {
     memoryTips: "想象 EXTRA（额外的）+ ORDINARY（普通的）= 超越普通的 = 非凡的"
   };
 
-  const handleSearch = async () => {
-    if (!searchTerm.trim()) return;
+  const handleSearchWithTerm = async (term: string) => {
+    if (!term.trim()) return;
     
     setIsSearching(true);
     setHasSearched(true);
@@ -76,6 +87,10 @@ export const SearchPage: React.FC = () => {
       setIsSearching(false);
       setSearchTerm(''); // Clear search input after search completion
     }, 1500);
+  };
+
+  const handleSearch = async () => {
+    handleSearchWithTerm(searchTerm);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
