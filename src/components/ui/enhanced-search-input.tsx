@@ -21,43 +21,49 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  const audioRef = useRef<HTMLAudioElement>(null);
+  const prevValueLength = useRef(value.length);
 
-  // Create mechanical typing sound
+  // Create mechanical typing sound - only trigger on actual typing (length increase)
   useEffect(() => {
-    // Create audio context for mechanical sound
-    const createKeySound = () => {
-      if (typeof window !== 'undefined' && window.AudioContext) {
-        const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
-        const oscillator = audioContext.createOscillator();
-        const gainNode = audioContext.createGain();
-        
-        oscillator.connect(gainNode);
-        gainNode.connect(audioContext.destination);
-        
-        oscillator.frequency.value = 800 + Math.random() * 200; // Random mechanical frequency
-        oscillator.type = 'square';
-        
-        gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
-        
-        oscillator.start(audioContext.currentTime);
-        oscillator.stop(audioContext.currentTime + 0.1);
-      }
-    };
-
-    const playSound = () => {
-      try {
-        createKeySound();
-      } catch (e) {
-        // Fallback for browsers that don't support Web Audio API
-        console.log('Audio not supported');
-      }
-    };
-
-    if (value.length > 0 && !disabled) {
-      playSound();
+    const currentLength = value.length;
+    const previousLength = prevValueLength.current;
+    
+    // Only play sound when length increases (typing) and not on initial load or deletion
+    if (currentLength > previousLength && currentLength > 0 && !disabled) {
+      const createKeySound = () => {
+        try {
+          if (typeof window !== 'undefined' && (window.AudioContext || (window as any).webkitAudioContext)) {
+            const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.value = 800 + Math.random() * 200; // Random mechanical frequency
+            oscillator.type = 'square';
+            
+            gainNode.gain.setValueAtTime(0.05, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.08);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.08);
+            
+            // Close audio context after use to prevent memory leaks
+            setTimeout(() => {
+              audioContext.close();
+            }, 100);
+          }
+        } catch (e) {
+          // Silently handle audio errors
+        }
+      };
+      
+      createKeySound();
     }
+    
+    // Update the previous length
+    prevValueLength.current = currentLength;
   }, [value.length, disabled]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
