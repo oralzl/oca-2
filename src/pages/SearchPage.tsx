@@ -286,7 +286,7 @@ export const SearchPage: React.FC = () => {
     <div className="w-full h-full flex flex-col">
       {/* Mobile Top Toolbar - Only show when hasSearched */}
       {hasSearched && !isSearching && (
-        <div className="md:hidden sticky top-0 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border/40">
+        <div className="md:hidden sticky top-0 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border/40" data-mobile-search-toolbar>
           <div className="flex items-center justify-between px-4 py-3">
             <Button
               variant="ghost"
