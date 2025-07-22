@@ -128,18 +128,13 @@ export const SearchPage: React.FC = () => {
           <CardContent className="space-y-6">
             {/* Definition */}
             <div className="space-y-3">
-              <div>
-                <h3 className="font-semibold text-lg mb-2">释义</h3>
-                <p className="text-lg leading-relaxed bg-muted/50 p-4 rounded-lg">
-                  {mockResult.definition}
-                </p>
-              </div>
-              <div>
-                <h3 className="font-semibold mb-2 text-muted-foreground">English Definition</h3>
-                <p className="text-muted-foreground italic">
-                  {mockResult.simpleExplanation}
-                </p>
-              </div>
+              <h3 className="font-semibold text-lg mb-2">释义</h3>
+              <p className="text-lg leading-relaxed bg-muted/50 p-4 rounded-lg">
+                {mockResult.definition}
+              </p>
+              <p className="text-lg leading-relaxed bg-muted/50 p-4 rounded-lg">
+                {mockResult.simpleExplanation}
+              </p>
             </div>
 
             <Separator />
