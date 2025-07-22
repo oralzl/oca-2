@@ -36,17 +36,17 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({
         </div>
 
         {/* Navigation */}
-        <SidebarGroup className="px-4 py-4">
+        <SidebarGroup className="px-6 py-6">
           
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className="space-y-2">
               {navigation.map(item => {
               const Icon = item.icon;
               return <SidebarMenuItem key={item.name}>
-                    <SidebarMenuButton asChild className={cn("w-full justify-start space-x-3 px-4 py-3 rounded-lg transition-all", isActive(item.href) ? "bg-gradient-primary text-white shadow-glow" : "hover:bg-muted")}>
+                    <SidebarMenuButton asChild className={cn("w-full justify-start space-x-4 px-6 py-4 rounded-xl transition-all text-base", isActive(item.href) ? "bg-gradient-primary text-white shadow-glow" : "hover:bg-muted")}>
                       <Link to={item.href}>
-                        <Icon className="w-5 h-5" />
-                        <span className="font-medium">{item.name}</span>
+                        <Icon className="w-6 h-6" />
+                        <span className="font-semibold">{item.name}</span>
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>;
@@ -56,12 +56,12 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({
         </SidebarGroup>
 
         {/* User Profile */}
-        <div className="mt-auto p-4 border-t border-border/50">
-          <SidebarMenuButton className="w-full justify-start space-x-3 px-4 py-3 rounded-lg hover:bg-muted">
-            <User className="w-5 h-5" />
+        <div className="mt-auto p-6 border-t border-border/50">
+          <SidebarMenuButton className="w-full justify-start space-x-4 px-6 py-4 rounded-xl hover:bg-muted text-base">
+            <User className="w-6 h-6" />
             <div className="flex flex-col items-start">
-              <span className="font-medium">用户账户</span>
-              <span className="text-xs text-muted-foreground">点击管理</span>
+              <span className="font-semibold">用户账户</span>
+              <span className="text-sm text-muted-foreground">点击管理</span>
             </div>
           </SidebarMenuButton>
         </div>
