@@ -111,13 +111,14 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
 
   const maxLength = 50; // Maximum word length
   const charCount = value.length;
+  const displayDots = 6; // Default display dots
 
   // Generate dots for counter
   const generateDots = () => {
     const dots = [];
-    const activeCount = Math.min(charCount, maxLength);
+    const activeCount = Math.min(charCount, displayDots);
     
-    for (let i = 0; i < maxLength; i++) {
+    for (let i = 0; i < displayDots; i++) {
       dots.push(
         <div
           key={i}
@@ -197,16 +198,8 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
       {/* Character Counter with Dots */}
       <div className="mt-4 flex justify-center items-center space-x-1 min-h-[12px]">
         <div className="flex space-x-1">
-          {generateDots().slice(0, 25)}
+          {generateDots()}
         </div>
-        {maxLength > 25 && (
-          <>
-            <div className="w-2" /> {/* Spacer */}
-            <div className="flex space-x-1">
-              {generateDots().slice(25)}
-            </div>
-          </>
-        )}
       </div>
       
       {/* Character count text */}
