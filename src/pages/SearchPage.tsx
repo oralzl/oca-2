@@ -94,9 +94,6 @@ export const SearchPage: React.FC = () => {
           <CardHeader className="pb-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
-                <div className="p-2 bg-gradient-primary/10 rounded-lg">
-                  <BookOpen className="w-6 h-6 text-primary" />
-                </div>
                 <div>
                   <CardTitle className="text-2xl font-bold">
                     {mockResult.word}
