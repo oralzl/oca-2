@@ -283,63 +283,32 @@ export const SearchPage: React.FC = () => {
 
   // Default/Mobile layout
   return (
-    <div className="w-full h-full flex flex-col">
-      {/* Mobile Bottom Toolbar - Only show when hasSearched */}
-      {hasSearched && !isSearching && (
-        <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-t border-border/40" data-mobile-search-toolbar>
-          <div className="flex items-center justify-between px-4 py-3">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={handleBack}
-              className="p-2"
-            >
-              <ArrowLeft className="w-5 h-5" />
-            </Button>
-            
-            <div className="flex items-center space-x-3">
-              <Button variant="ghost" size="sm" className="p-2">
-                <Star className="w-5 h-5" />
-              </Button>
-              <Button variant="ghost" size="sm" className="p-2">
-                <RotateCcw className="w-5 h-5" />
-              </Button>
-              <Button variant="ghost" size="sm" className="p-2">
-                <Copy className="w-5 h-5" />
-              </Button>
-            </div>
-          </div>
+    <div className={`w-full max-w-2xl mx-auto space-y-8 p-4 ${!hasSearched ? 'h-full flex flex-col justify-center' : 'pt-8'}`}>
+      {/* Search Header */}
+      {!isSearching && !hasSearched && (
+        <div className="text-center space-y-4">
+          <h1 className="text-3xl font-bold text-gradient">智能单词查询</h1>
+          <p className="text-muted-foreground">
+            输入任何英文单词，获得AI驱动的深度解释
+          </p>
         </div>
       )}
 
-      <div className={`${hasSearched ? 'flex-1 overflow-auto pb-20' : 'h-full flex flex-col justify-center'} max-w-2xl mx-auto space-y-8 p-4 ${!hasSearched ? '' : 'pt-4'}`}>
-        {/* Search Header */}
-        {!isSearching && !hasSearched && (
-          <div className="text-center space-y-4">
-            <h1 className="text-3xl font-bold text-gradient">智能单词查询</h1>
-            <p className="text-muted-foreground">
-              输入任何英文单词，获得AI驱动的深度解释
-            </p>
-          </div>
-        )}
+      {/* Enhanced Search Form */}
+      <div className="space-y-6 w-full">
+        <EnhancedSearchInput
+          value={searchTerm}
+          onChange={(value) => setSearchTerm(value)}
+          onKeyPress={handleKeyPress}
+          onSearch={handleSearch}
+          placeholder="输入英文单词..."
+          disabled={isSearching}
+        />
+      </div>
 
-        {/* Enhanced Search Form - Only show when no search performed */}
-        {!hasSearched && (
-          <div className="space-y-6 w-full">
-            <EnhancedSearchInput
-              value={searchTerm}
-              onChange={(value) => setSearchTerm(value)}
-              onKeyPress={handleKeyPress}
-              onSearch={handleSearch}
-              placeholder="输入英文单词..."
-              disabled={isSearching}
-            />
-          </div>
-        )}
-
-        {/* Search Result */}
-        {hasSearched && !isSearching && (
-          <Card className="shadow-medium border-0 animate-slide-up">
+      {/* Search Result */}
+      {hasSearched && searchTerm && !isSearching && (
+        <Card className="shadow-medium border-0 animate-slide-up">
           <CardHeader className="pb-4">
             <div className="flex flex-col space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0">
               <div className="min-w-0 flex-1">
@@ -494,8 +463,7 @@ export const SearchPage: React.FC = () => {
             </div>
           </CardContent>
         </Card>
-        )}
-      </div>
+      )}
     </div>
   );
 };
