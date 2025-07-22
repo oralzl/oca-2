@@ -111,7 +111,8 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
 
   const maxLength = 50; // Maximum word length
   const charCount = value.length;
-  const displayDots = 6; // Default display dots
+  const defaultDots = 6; // Default display dots
+  const displayDots = Math.max(defaultDots, charCount); // Show more dots when exceeding default
 
   // Generate dots for counter
   const generateDots = () => {
