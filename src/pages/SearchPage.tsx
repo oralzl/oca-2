@@ -78,27 +78,11 @@ export const SearchPage: React.FC = () => {
           value={searchTerm}
           onChange={(value) => setSearchTerm(value)}
           onKeyPress={handleKeyPress}
+          onSearch={handleSearch}
           placeholder="输入英文单词..."
           disabled={isSearching}
           className="w-full max-w-2xl mx-auto"
         />
-        
-        <div className="flex justify-center">
-          <Button 
-            onClick={handleSearch}
-            disabled={isSearching || !searchTerm.trim()}
-            className="h-14 px-8 text-lg bg-gradient-primary text-white hover-glow rounded-xl shadow-lg"
-          >
-            {isSearching ? (
-              <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
-            ) : (
-              <>
-                <Search className="w-6 h-6 mr-3" />
-                智能查询
-              </>
-            )}
-          </Button>
-        </div>
       </div>
 
       {/* Search Result */}

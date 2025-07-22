@@ -7,6 +7,7 @@ interface EnhancedSearchInputProps {
   value: string;
   onChange: (value: string) => void;
   onKeyPress?: (e: React.KeyboardEvent) => void;
+  onSearch?: () => void;
   placeholder?: string;
   disabled?: boolean;
   className?: string;
@@ -16,6 +17,7 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
   value,
   onChange,
   onKeyPress,
+  onSearch,
   placeholder = "输入英文单词...",
   disabled = false,
   className
@@ -156,13 +158,6 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
           isFocused && "opacity-100"
         )} />
         
-        {/* Search Icon */}
-        <Search className={cn(
-          "absolute left-6 top-1/2 transform -translate-y-1/2 transition-all duration-300 pointer-events-none",
-          "w-6 h-6",
-          isFocused ? "text-primary scale-110" : "text-muted-foreground"
-        )} />
-        
         {/* Input Field */}
         <input
           ref={inputRef}
@@ -176,7 +171,7 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
           disabled={disabled}
           maxLength={maxLength}
           className={cn(
-            "w-full h-20 pl-16 pr-16 bg-transparent text-2xl font-medium text-center",
+            "w-full h-20 pl-8 pr-16 bg-transparent text-2xl font-medium text-center",
             "placeholder:text-muted-foreground/60",
             "focus:outline-none transition-all duration-300",
             "disabled:opacity-50 disabled:cursor-not-allowed",
@@ -187,6 +182,23 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
             letterSpacing: '0.05em'
           }}
         />
+        
+        {/* Search Button */}
+        {onSearch && (
+          <button
+            onClick={onSearch}
+            disabled={disabled}
+            className={cn(
+              "absolute right-4 top-1/2 transform -translate-y-1/2",
+              "w-12 h-12 rounded-full bg-primary/10 hover:bg-primary/20",
+              "flex items-center justify-center transition-all duration-300",
+              "disabled:opacity-50 disabled:cursor-not-allowed",
+              "border border-primary/20 hover:border-primary/40"
+            )}
+          >
+            <Search className="w-5 h-5 text-primary" />
+          </button>
+        )}
         
         {/* Scanning line effect */}
         <div className={cn(
