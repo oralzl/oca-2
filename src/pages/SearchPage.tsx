@@ -65,7 +65,7 @@ export const SearchPage: React.FC = () => {
   };
 
   return (
-    <div className={`max-w-4xl mx-auto space-y-8 p-4 ${!hasSearched ? 'h-full flex flex-col justify-center' : ''}`}>
+    <div className={`max-w-4xl mx-auto space-y-8 p-4 ${!hasSearched ? 'h-full flex flex-col justify-center' : 'pt-8'}`}>
       {/* Search Header */}
       <div className="text-center space-y-4">
         <h1 className="text-3xl font-bold text-gradient">智能单词查询</h1>
@@ -75,7 +75,7 @@ export const SearchPage: React.FC = () => {
       </div>
 
       {/* Enhanced Search Form */}
-      <div className="space-y-6">
+      <div className="space-y-6 w-full max-w-2xl mx-auto">
         <EnhancedSearchInput
           value={searchTerm}
           onChange={(value) => setSearchTerm(value)}
