@@ -21,8 +21,27 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
   className
 }) => {
   const [isFocused, setIsFocused] = useState(false);
+  const [audioEnabled, setAudioEnabled] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const audioContextRef = useRef<AudioContext | null>(null);
   const prevValueLength = useRef(value.length);
+
+  // Initialize audio context on first user interaction
+  const initializeAudio = async () => {
+    if (!audioEnabled && typeof window !== 'undefined' && (window.AudioContext || (window as any).webkitAudioContext)) {
+      try {
+        const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+        if (audioContext.state === 'suspended') {
+          await audioContext.resume();
+        }
+        audioContextRef.current = audioContext;
+        setAudioEnabled(true);
+        console.log('Audio enabled through user interaction');
+      } catch (e) {
+        console.error('Failed to initialize audio:', e);
+      }
+    }
+  };
 
   // Create mechanical typing sound - only trigger on actual typing (length increase)
   useEffect(() => {
@@ -30,19 +49,11 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
     const previousLength = prevValueLength.current;
     
     // Only play sound when length increases (typing) and not on initial load or deletion
-    if (currentLength > previousLength && currentLength > 0 && !disabled) {
-      const createKeySound = async () => {
+    if (currentLength > previousLength && currentLength > 0 && !disabled && audioEnabled && audioContextRef.current) {
+      const createKeySound = () => {
         try {
-          if (typeof window !== 'undefined' && (window.AudioContext || (window as any).webkitAudioContext)) {
-            console.log('Creating audio context for typing sound');
-            const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
-            
-            // Resume audio context if suspended (required for user interaction)
-            if (audioContext.state === 'suspended') {
-              await audioContext.resume();
-              console.log('Audio context resumed');
-            }
-            
+          const audioContext = audioContextRef.current;
+          if (audioContext && audioContext.state === 'running') {
             const oscillator = audioContext.createOscillator();
             const gainNode = audioContext.createGain();
             
@@ -50,24 +61,17 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
             gainNode.connect(audioContext.destination);
             
             // More noticeable mechanical sound
-            oscillator.frequency.value = 1200 + Math.random() * 400; // Higher frequency for mechanical sound
+            oscillator.frequency.value = 1200 + Math.random() * 400;
             oscillator.type = 'square';
             
             // Increased volume for better audibility
-            gainNode.gain.setValueAtTime(0.15, audioContext.currentTime);
-            gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.1);
+            gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.08);
             
             oscillator.start(audioContext.currentTime);
-            oscillator.stop(audioContext.currentTime + 0.1);
+            oscillator.stop(audioContext.currentTime + 0.08);
             
             console.log('Typing sound played successfully');
-            
-            // Close audio context after use to prevent memory leaks
-            setTimeout(() => {
-              audioContext.close();
-            }, 150);
-          } else {
-            console.log('AudioContext not available');
           }
         } catch (e) {
           console.error('Audio error:', e);
@@ -79,16 +83,17 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
     
     // Update the previous length
     prevValueLength.current = currentLength;
-  }, [value.length, disabled]);
+  }, [value.length, disabled, audioEnabled]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log('Input change triggered:', e.target.value);
     onChange(e.target.value);
   };
 
-  const handleFocus = () => {
+  const handleFocus = async () => {
     console.log('Input focused');
     setIsFocused(true);
+    await initializeAudio();
   };
 
   const handleBlur = () => {
@@ -96,10 +101,11 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
     setIsFocused(false);
   };
 
-  const handleContainerClick = () => {
+  const handleContainerClick = async () => {
     console.log('Container clicked, focusing input');
     if (inputRef.current && !disabled) {
       inputRef.current.focus();
+      await initializeAudio();
     }
   };
 
