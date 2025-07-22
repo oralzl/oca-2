@@ -110,6 +110,7 @@ export const SearchPage: React.FC = () => {
                   placeholder="输入英文单词..."
                   disabled={isSearching}
                   className="w-full"
+                  compact={true}
                 />
               </div>
             </div>

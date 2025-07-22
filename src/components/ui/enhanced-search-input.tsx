@@ -11,6 +11,7 @@ interface EnhancedSearchInputProps {
   placeholder?: string;
   disabled?: boolean;
   className?: string;
+  compact?: boolean;
 }
 
 export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
@@ -20,7 +21,8 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
   onSearch,
   placeholder = "输入英文单词...",
   disabled = false,
-  className
+  className,
+  compact = false
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [audioEnabled, setAudioEnabled] = useState(false);
@@ -172,10 +174,11 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
           disabled={disabled}
           maxLength={maxLength}
           className={cn(
-            "w-full h-20 px-4 bg-transparent text-2xl font-medium text-center",
+            "w-full px-4 bg-transparent font-medium text-center",
             "placeholder:text-muted-foreground/60",
             "focus:outline-none transition-all duration-300",
             "disabled:opacity-50 disabled:cursor-not-allowed",
+            compact ? "h-7 text-base" : "h-20 text-2xl",
             isFocused && "text-foreground placeholder:text-muted-foreground/40"
           )}
           style={{
@@ -192,15 +195,19 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
               disabled={disabled}
               className={cn(
                 "absolute right-4 top-1/2 transform -translate-y-1/2",
-                "w-8 h-8 flex items-center justify-center",
+                "flex items-center justify-center",
                 "transition-all duration-150",
+                compact ? "w-5 h-5" : "w-8 h-8",
                 !disabled && "hover:scale-110 active:scale-95",
                 disabled ? "cursor-not-allowed" : ""
               )}
             >
               {!disabled && (
                 <Search 
-                  className="w-6 h-6 text-blue-500" 
+                  className={cn(
+                    "text-blue-500",
+                    compact ? "w-4 h-4" : "w-6 h-6"
+                  )}
                   strokeWidth={3}
                   style={{
                     filter: 'drop-shadow(1px 1px 0px rgba(59, 130, 246, 0.3))'
@@ -247,11 +254,13 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
         )} />
         
         {/* Character Counter with Dots - Inside Input */}
-        <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex justify-center items-center space-x-1 min-h-[12px]">
-          <div className="flex space-x-1">
-            {generateDots()}
+        {!compact && (
+          <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex justify-center items-center space-x-1 min-h-[12px]">
+            <div className="flex space-x-1">
+              {generateDots()}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
