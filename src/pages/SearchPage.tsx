@@ -241,7 +241,7 @@ export const SearchPage: React.FC = () => {
       )}
 
       {/* Quick Start Tips */}
-      {!searchTerm && (
+      {!hasSearched && (
         <Card className="bg-gradient-primary/5 border-primary/20">
           <CardHeader>
             <CardTitle className="flex items-center space-x-2">
