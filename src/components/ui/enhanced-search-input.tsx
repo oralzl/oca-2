@@ -245,12 +245,12 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
           "transition-all duration-1000 ease-in-out",
           isFocused ? "w-full opacity-100" : "w-0 opacity-0"
         )} />
-      </div>
-      
-      {/* Character Counter with Dots */}
-      <div className="mt-4 flex justify-center items-center space-x-1 min-h-[12px]">
-        <div className="flex space-x-1">
-          {generateDots()}
+        
+        {/* Character Counter with Dots - Inside Input */}
+        <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex justify-center items-center space-x-1 min-h-[12px]">
+          <div className="flex space-x-1">
+            {generateDots()}
+          </div>
         </div>
       </div>
     </div>
