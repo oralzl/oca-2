@@ -92,31 +92,29 @@ export const SearchPage: React.FC = () => {
       {hasSearched && searchTerm && !isSearching && (
         <Card className="shadow-medium border-0 animate-slide-up">
           <CardHeader className="pb-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <div>
-                  <div className="flex items-center space-x-3">
-                    <CardTitle className="text-2xl font-bold">
-                      {mockResult.word}
-                    </CardTitle>
-                    <Badge variant="secondary" className="text-sm">
-                      {mockResult.partOfSpeech}
-                    </Badge>
-                  </div>
-                  <div className="flex items-center space-x-3 mt-1">
-                    <span className="text-muted-foreground font-mono">
-                      {mockResult.pronunciation}
-                    </span>
-                    <Button variant="ghost" size="sm">
-                      <Volume2 className="w-4 h-4" />
-                    </Button>
-                  </div>
+            <div className="flex flex-col space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0">
+              <div className="min-w-0 flex-1">
+                <div className="flex flex-col space-y-2 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-3">
+                  <CardTitle className="text-xl sm:text-2xl font-bold break-words">
+                    {mockResult.word}
+                  </CardTitle>
+                  <Badge variant="secondary" className="text-sm w-fit">
+                    {mockResult.partOfSpeech}
+                  </Badge>
+                </div>
+                <div className="flex flex-col space-y-2 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-3 mt-2">
+                  <span className="text-muted-foreground font-mono text-sm break-all">
+                    {mockResult.pronunciation}
+                  </span>
+                  <Button variant="ghost" size="sm" className="w-fit">
+                    <Volume2 className="w-4 h-4" />
+                  </Button>
                 </div>
               </div>
-              <div className="flex items-center space-x-2">
-                <Button variant="outline" size="sm">
-                  <Star className="w-4 h-4 mr-2" />
-                  收藏
+              <div className="flex items-center space-x-2 shrink-0">
+                <Button variant="outline" size="sm" className="text-xs">
+                  <Star className="w-4 h-4 sm:mr-2" />
+                  <span className="hidden sm:inline">收藏</span>
                 </Button>
                 <Button variant="ghost" size="sm">
                   <RotateCcw className="w-4 h-4" />
