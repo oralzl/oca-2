@@ -190,16 +190,19 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
             disabled={disabled}
             className={cn(
               "absolute right-4 top-1/2 transform -translate-y-1/2",
-              "w-10 h-10 bg-primary border-2 border-primary-foreground",
-              "flex items-center justify-center transition-all duration-150",
+              "w-8 h-8 flex items-center justify-center",
+              "transition-all duration-150",
               "disabled:opacity-50 disabled:cursor-not-allowed",
-              "hover:bg-primary/80 active:translate-x-0.5 active:translate-y-0.5",
-              "shadow-[2px_2px_0px_0px_hsl(var(--primary-foreground))]",
-              "hover:shadow-[1px_1px_0px_0px_hsl(var(--primary-foreground))]",
-              "active:shadow-none"
+              "hover:scale-110 active:scale-95"
             )}
           >
-            <Search className="w-4 h-4 text-primary-foreground" />
+            <Search 
+              className="w-6 h-6 text-blue-500" 
+              strokeWidth={3}
+              style={{
+                filter: 'drop-shadow(1px 1px 0px rgba(59, 130, 246, 0.3))'
+              }}
+            />
           </button>
         )}
         
