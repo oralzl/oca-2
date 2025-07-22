@@ -66,24 +66,27 @@ export const SearchPage: React.FC = () => {
 
   return (
     <div className={`max-w-4xl mx-auto space-y-8 ${!hasSearched ? 'min-h-screen flex flex-col justify-center' : ''}`}>
-      {/* Search Header */}
-      <div className="text-center space-y-4">
-        <h1 className="text-3xl font-bold text-gradient">智能单词查询</h1>
-        <p className="text-muted-foreground">
-          输入任何英文单词，获得AI驱动的深度解释
-        </p>
-      </div>
+      {/* Search Section - Centered when no results */}
+      <div className={!hasSearched ? "flex-1 flex flex-col justify-center space-y-8" : "space-y-8"}>
+        {/* Search Header */}
+        <div className="text-center space-y-4">
+          <h1 className="text-3xl font-bold text-gradient">智能单词查询</h1>
+          <p className="text-muted-foreground">
+            输入任何英文单词，获得AI驱动的深度解释
+          </p>
+        </div>
 
-      {/* Enhanced Search Form */}
-      <div className="space-y-6">
-        <EnhancedSearchInput
-          value={searchTerm}
-          onChange={(value) => setSearchTerm(value)}
-          onKeyPress={handleKeyPress}
-          onSearch={handleSearch}
-          placeholder="输入英文单词..."
-          disabled={isSearching}
-        />
+        {/* Enhanced Search Form */}
+        <div className="space-y-6">
+          <EnhancedSearchInput
+            value={searchTerm}
+            onChange={(value) => setSearchTerm(value)}
+            onKeyPress={handleKeyPress}
+            onSearch={handleSearch}
+            placeholder="输入英文单词..."
+            disabled={isSearching}
+          />
+        </div>
       </div>
 
       {/* Search Result */}
