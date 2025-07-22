@@ -144,9 +144,9 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
         className={cn(
           "relative border-2 transition-all duration-500 bg-card/50 backdrop-blur-sm cursor-text",
           "rounded-2xl overflow-hidden",
-          isFocused 
-            ? "border-primary shadow-[0_0_40px_-12px_hsl(var(--primary))] scale-[1.02]" 
-            : "border-border/20 hover:border-border/40",
+            isFocused 
+              ? "border-primary shadow-[0_0_40px_-12px_hsl(var(--primary))]" 
+              : "border-border/20 hover:border-border/40",
           disabled && "opacity-50 cursor-not-allowed"
         )}
         onClick={handleContainerClick}
