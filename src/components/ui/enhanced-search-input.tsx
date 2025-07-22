@@ -196,13 +196,39 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
               "hover:scale-110 active:scale-95"
             )}
           >
-            <Search 
-              className="w-6 h-6 text-blue-500" 
-              strokeWidth={3}
-              style={{
-                filter: 'drop-shadow(1px 1px 0px rgba(59, 130, 246, 0.3))'
-              }}
-            />
+            {disabled ? (
+              // 8bit pixel style loading animation
+              <div className="relative w-6 h-6 animate-pulse">
+                <div className="absolute inset-0 grid grid-cols-3 gap-[1px]">
+                  {/* Create 9 pixel blocks in 3x3 grid */}
+                  {Array.from({ length: 9 }).map((_, i) => (
+                    <div
+                      key={i}
+                      className={cn(
+                        "w-[6px] h-[6px] transition-all duration-300",
+                        // Create breathing pattern with different delays
+                        i === 4 ? "bg-blue-500 animate-[pulse_1s_ease-in-out_infinite]" : // center
+                        [1, 3, 5, 7].includes(i) ? "bg-blue-400 animate-[pulse_1.2s_ease-in-out_infinite_0.1s]" : // cross
+                        "bg-blue-300 animate-[pulse_1.4s_ease-in-out_infinite_0.2s]" // corners
+                      )}
+                      style={{
+                        animationDelay: `${(i % 3) * 0.1}s`,
+                      }}
+                    />
+                  ))}
+                </div>
+                {/* Outer glow effect */}
+                <div className="absolute inset-0 bg-blue-500/20 blur-sm animate-[pulse_2s_ease-in-out_infinite]" />
+              </div>
+            ) : (
+              <Search 
+                className="w-6 h-6 text-blue-500" 
+                strokeWidth={3}
+                style={{
+                  filter: 'drop-shadow(1px 1px 0px rgba(59, 130, 246, 0.3))'
+                }}
+              />
+            )}
           </button>
         )}
         
