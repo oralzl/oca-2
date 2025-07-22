@@ -216,16 +216,6 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
           {charCount}/{maxLength}
         </span>
       </div>
-      
-      {/* Typing indicator */}
-      {isFocused && (
-        <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
-          <div className="flex items-center space-x-2 bg-primary/10 backdrop-blur-sm rounded-full px-3 py-1 border border-primary/20">
-            <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            <span className="text-xs text-primary font-medium">输入中...</span>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
