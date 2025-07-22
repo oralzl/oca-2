@@ -158,6 +158,8 @@ export const SearchPage: React.FC = () => {
               </div>
             </div>
 
+            <Separator />
+
             {/* Vocabulary Extensions & Learning Aids */}
             <div className="space-y-6">
               {/* Synonyms & Antonyms */}
