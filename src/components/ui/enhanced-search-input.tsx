@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { Search } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -56,6 +57,7 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
           }
         } catch (e) {
           // Silently handle audio errors
+          console.log('Audio not available');
         }
       };
       
@@ -67,7 +69,25 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
   }, [value.length, disabled]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log('Input change triggered:', e.target.value);
     onChange(e.target.value);
+  };
+
+  const handleFocus = () => {
+    console.log('Input focused');
+    setIsFocused(true);
+  };
+
+  const handleBlur = () => {
+    console.log('Input blurred');
+    setIsFocused(false);
+  };
+
+  const handleContainerClick = () => {
+    console.log('Container clicked, focusing input');
+    if (inputRef.current && !disabled) {
+      inputRef.current.focus();
+    }
   };
 
   const maxLength = 50; // Maximum word length
@@ -97,23 +117,27 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
   return (
     <div className={cn("relative group", className)}>
       {/* Main Input Container */}
-      <div className={cn(
-        "relative border-2 transition-all duration-500 bg-card/50 backdrop-blur-sm",
-        "rounded-2xl overflow-hidden",
-        isFocused 
-          ? "border-primary shadow-[0_0_40px_-12px_hsl(var(--primary))] scale-[1.02]" 
-          : "border-border/20 hover:border-border/40"
-      )}>
+      <div 
+        className={cn(
+          "relative border-2 transition-all duration-500 bg-card/50 backdrop-blur-sm cursor-text",
+          "rounded-2xl overflow-hidden",
+          isFocused 
+            ? "border-primary shadow-[0_0_40px_-12px_hsl(var(--primary))] scale-[1.02]" 
+            : "border-border/20 hover:border-border/40",
+          disabled && "opacity-50 cursor-not-allowed"
+        )}
+        onClick={handleContainerClick}
+      >
         {/* Animated background glow */}
         <div className={cn(
           "absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5",
-          "opacity-0 transition-opacity duration-500",
+          "opacity-0 transition-opacity duration-500 pointer-events-none",
           isFocused && "opacity-100"
         )} />
         
         {/* Search Icon */}
         <Search className={cn(
-          "absolute left-6 top-1/2 transform -translate-y-1/2 transition-all duration-300",
+          "absolute left-6 top-1/2 transform -translate-y-1/2 transition-all duration-300 pointer-events-none",
           "w-6 h-6",
           isFocused ? "text-primary scale-110" : "text-muted-foreground"
         )} />
@@ -125,8 +149,8 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
           value={value}
           onChange={handleInputChange}
           onKeyPress={onKeyPress}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
           placeholder={placeholder}
           disabled={disabled}
           maxLength={maxLength}
@@ -145,7 +169,7 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
         
         {/* Scanning line effect */}
         <div className={cn(
-          "absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent",
+          "absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent pointer-events-none",
           "transition-all duration-1000 ease-in-out",
           isFocused ? "w-full opacity-100" : "w-0 opacity-0"
         )} />
