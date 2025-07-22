@@ -284,9 +284,9 @@ export const SearchPage: React.FC = () => {
   // Default/Mobile layout
   return (
     <div className="w-full h-full flex flex-col">
-      {/* Mobile Top Toolbar - Only show when hasSearched */}
+      {/* Mobile Bottom Toolbar - Only show when hasSearched */}
       {hasSearched && !isSearching && (
-        <div className="md:hidden sticky top-0 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border/40" data-mobile-search-toolbar>
+        <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-t border-border/40" data-mobile-search-toolbar>
           <div className="flex items-center justify-between px-4 py-3">
             <Button
               variant="ghost"
@@ -312,7 +312,7 @@ export const SearchPage: React.FC = () => {
         </div>
       )}
 
-      <div className={`${hasSearched ? 'flex-1 overflow-auto' : 'h-full flex flex-col justify-center'} max-w-2xl mx-auto space-y-8 p-4 ${!hasSearched ? '' : 'pt-4'}`}>
+      <div className={`${hasSearched ? 'flex-1 overflow-auto pb-20' : 'h-full flex flex-col justify-center'} max-w-2xl mx-auto space-y-8 p-4 ${!hasSearched ? '' : 'pt-4'}`}>
         {/* Search Header */}
         {!isSearching && !hasSearched && (
           <div className="text-center space-y-4">
