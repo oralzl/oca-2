@@ -81,7 +81,6 @@ export const SearchPage: React.FC = () => {
           onSearch={handleSearch}
           placeholder="输入英文单词..."
           disabled={isSearching}
-          className="w-full max-w-2xl mx-auto"
         />
       </div>
 
