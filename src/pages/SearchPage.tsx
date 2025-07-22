@@ -22,6 +22,7 @@ export const SearchPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [isSearching, setIsSearching] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
+  const [hasSearched, setHasSearched] = useState(false);
   
   // Mock search result for demonstration
   const mockResult = {
@@ -50,6 +51,7 @@ export const SearchPage: React.FC = () => {
     if (!searchTerm.trim()) return;
     
     setIsSearching(true);
+    setHasSearched(true);
     // Simulate API call
     setTimeout(() => {
       setIsSearching(false);
@@ -85,7 +87,7 @@ export const SearchPage: React.FC = () => {
       </div>
 
       {/* Search Result */}
-      {searchTerm && !isSearching && (
+      {hasSearched && searchTerm && !isSearching && (
         <Card className="shadow-medium border-0 animate-slide-up">
           <CardHeader className="pb-4">
             <div className="flex items-center justify-between">
