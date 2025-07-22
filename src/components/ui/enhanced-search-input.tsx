@@ -202,20 +202,6 @@ export const EnhancedSearchInput: React.FC<EnhancedSearchInputProps> = ({
           {generateDots()}
         </div>
       </div>
-      
-      {/* Character count text */}
-      <div className="mt-2 text-center">
-        <span className={cn(
-          "text-sm font-mono transition-colors duration-300",
-          charCount > maxLength * 0.8 
-            ? "text-warning" 
-            : charCount > 0 
-              ? "text-primary" 
-              : "text-muted-foreground/60"
-        )}>
-          {charCount}/{maxLength}
-        </span>
-      </div>
     </div>
   );
 };
