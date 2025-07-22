@@ -284,35 +284,7 @@ export const SearchPage: React.FC = () => {
   // Default/Mobile layout
   return (
     <div className="w-full h-full flex flex-col">
-      {/* Mobile Top Toolbar - Only show when hasSearched */}
-      {hasSearched && !isSearching && (
-        <div className="md:hidden sticky top-0 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border/40">
-          <div className="flex items-center justify-between px-4 py-3">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={handleBack}
-              className="p-2"
-            >
-              <ArrowLeft className="w-5 h-5" />
-            </Button>
-            
-            <div className="flex items-center space-x-3">
-              <Button variant="ghost" size="sm" className="p-2">
-                <Star className="w-5 h-5" />
-              </Button>
-              <Button variant="ghost" size="sm" className="p-2">
-                <RotateCcw className="w-5 h-5" />
-              </Button>
-              <Button variant="ghost" size="sm" className="p-2">
-                <Copy className="w-5 h-5" />
-              </Button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      <div className={`${hasSearched ? 'flex-1 overflow-auto' : 'h-full flex flex-col justify-center'} max-w-2xl mx-auto space-y-8 p-4 ${!hasSearched ? '' : 'pt-4'}`}>
+      <div className={`${hasSearched ? 'flex-1 overflow-auto' : 'h-full flex flex-col justify-center'} max-w-2xl mx-auto space-y-8 p-4 ${!hasSearched ? '' : 'pt-4'} ${hasSearched ? 'pb-20' : ''}`}>
         {/* Search Header */}
         {!isSearching && !hasSearched && (
           <div className="text-center space-y-4">
@@ -496,6 +468,38 @@ export const SearchPage: React.FC = () => {
         </Card>
         )}
       </div>
+      
+      {/* Mobile Bottom Toolbar - Only show when hasSearched */}
+      {hasSearched && !isSearching && (
+        <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-t border-border/40">
+          <div className="flex items-center justify-between px-4 py-3">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleBack}
+              className="flex flex-col items-center space-y-1 p-2"
+            >
+              <ArrowLeft className="w-5 h-5" />
+              <span className="text-xs">返回</span>
+            </Button>
+            
+            <Button variant="ghost" size="sm" className="flex flex-col items-center space-y-1 p-2">
+              <Star className="w-5 h-5" />
+              <span className="text-xs">收藏</span>
+            </Button>
+            
+            <Button variant="ghost" size="sm" className="flex flex-col items-center space-y-1 p-2">
+              <RotateCcw className="w-5 h-5" />
+              <span className="text-xs">重试</span>
+            </Button>
+            
+            <Button variant="ghost" size="sm" className="flex flex-col items-center space-y-1 p-2">
+              <Copy className="w-5 h-5" />
+              <span className="text-xs">复制</span>
+            </Button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

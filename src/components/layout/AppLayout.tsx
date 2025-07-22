@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation, useSearchParams } from 'react-router-dom';
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { SidebarProvider } from "@/components/ui/sidebar";
@@ -7,6 +7,11 @@ import { AppSidebar } from './AppSidebar';
 import { BottomNavigation } from './BottomNavigation';
 
 export const AppLayout: React.FC = () => {
+  const location = useLocation();
+  const [searchParams] = useSearchParams();
+  
+  // Hide bottom navigation on mobile search results page
+  const hideBottomNav = location.pathname === '/search' && searchParams.get('q');
   return (
     <SidebarProvider>
       <div className="h-screen bg-gradient-surface flex w-full overflow-hidden">
@@ -19,7 +24,7 @@ export const AppLayout: React.FC = () => {
         </main>
         
         {/* Mobile Bottom Navigation */}
-        <BottomNavigation className="md:hidden" />
+        {!hideBottomNav && <BottomNavigation className="md:hidden" />}
         
         <Toaster />
         <Sonner />
