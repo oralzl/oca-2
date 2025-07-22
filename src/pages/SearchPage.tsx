@@ -103,7 +103,7 @@ export const SearchPage: React.FC = () => {
             <div className="flex-1 max-w-md mx-8">
               <div className="relative animate-scale-in">
                 <EnhancedSearchInput
-                  value=""
+                  value={searchTerm}
                   onChange={(value) => setSearchTerm(value)}
                   onKeyPress={handleKeyPress}
                   onSearch={handleSearch}
