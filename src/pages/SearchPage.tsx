@@ -21,7 +21,6 @@ import {
 export const SearchPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [isSearching, setIsSearching] = useState(false);
-  const [showDetails, setShowDetails] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
   
   // Mock search result for demonstration
@@ -155,71 +154,55 @@ export const SearchPage: React.FC = () => {
               </div>
             </div>
 
-            {/* Expandable Details */}
-            <div className="space-y-4">
-              <Button
-                variant="ghost"
-                onClick={() => setShowDetails(!showDetails)}
-                className="w-full justify-between hover:bg-muted/50"
-              >
-                <span className="flex items-center space-x-2">
-                  <Sparkles className="w-4 h-4" />
-                  <span>词汇扩展 & 学习辅助</span>
-                </span>
-                {showDetails ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-              </Button>
-
-              {showDetails && (
-                <div className="space-y-6 animate-slide-up">
-                  {/* Synonyms & Antonyms */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <h4 className="font-semibold text-success">同义词</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {mockResult.synonyms.map((synonym, index) => (
-                          <Badge key={index} variant="outline" className="text-success border-success/20">
-                            {synonym}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                      <h4 className="font-semibold text-destructive">反义词</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {mockResult.antonyms.map((antonym, index) => (
-                          <Badge key={index} variant="outline" className="text-destructive border-destructive/20">
-                            {antonym}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  <Separator />
-
-                  {/* Etymology */}
-                  <div className="space-y-2">
-                    <div className="flex items-center space-x-2">
-                      <BookOpen className="w-4 h-4 text-accent-warm" />
-                      <h4 className="font-semibold">词源</h4>
-                    </div>
-                    <p className="text-muted-foreground bg-accent-warm/5 p-3 rounded-lg">
-                      {mockResult.etymology}
-                    </p>
-                  </div>
-
-                  {/* Memory Tips */}
-                  <div className="space-y-2">
-                    <div className="flex items-center space-x-2">
-                      <Lightbulb className="w-4 h-4 text-accent-warm" />
-                      <h4 className="font-semibold">记忆技巧</h4>
-                    </div>
-                    <p className="text-muted-foreground bg-accent-warm/5 p-3 rounded-lg">
-                      {mockResult.memoryTips}
-                    </p>
+            {/* Vocabulary Extensions & Learning Aids */}
+            <div className="space-y-6">
+              {/* Synonyms & Antonyms */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <h4 className="font-semibold text-success">同义词</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {mockResult.synonyms.map((synonym, index) => (
+                      <Badge key={index} variant="outline" className="text-success border-success/20">
+                        {synonym}
+                      </Badge>
+                    ))}
                   </div>
                 </div>
-              )}
+                <div className="space-y-2">
+                  <h4 className="font-semibold text-destructive">反义词</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {mockResult.antonyms.map((antonym, index) => (
+                      <Badge key={index} variant="outline" className="text-destructive border-destructive/20">
+                        {antonym}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <Separator />
+
+              {/* Etymology */}
+              <div className="space-y-2">
+                <div className="flex items-center space-x-2">
+                  <BookOpen className="w-4 h-4 text-accent-warm" />
+                  <h4 className="font-semibold">词源</h4>
+                </div>
+                <p className="text-muted-foreground bg-accent-warm/5 p-3 rounded-lg">
+                  {mockResult.etymology}
+                </p>
+              </div>
+
+              {/* Memory Tips */}
+              <div className="space-y-2">
+                <div className="flex items-center space-x-2">
+                  <Lightbulb className="w-4 h-4 text-accent-warm" />
+                  <h4 className="font-semibold">记忆技巧</h4>
+                </div>
+                <p className="text-muted-foreground bg-accent-warm/5 p-3 rounded-lg">
+                  {mockResult.memoryTips}
+                </p>
+              </div>
             </div>
 
             {/* Actions */}
