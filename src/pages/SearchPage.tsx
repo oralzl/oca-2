@@ -312,7 +312,7 @@ export const SearchPage: React.FC = () => {
         </div>
       )}
 
-      <div className={`${hasSearched ? 'flex-1 overflow-auto pb-20' : 'h-full flex flex-col justify-center'} max-w-2xl mx-auto space-y-8 p-4 ${!hasSearched ? '' : 'pt-4'}`}>
+      <div className={`${hasSearched ? 'flex-1 overflow-auto pb-32' : 'h-full flex flex-col justify-center'} max-w-2xl mx-auto space-y-8 p-4 ${!hasSearched ? '' : 'pt-4'}`}>
         {/* Search Header */}
         {!isSearching && !hasSearched && (
           <div className="text-center space-y-4">
