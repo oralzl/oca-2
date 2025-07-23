@@ -188,15 +188,6 @@ export const HomePage: React.FC = () => {
 
         {/* Features Section */}
         <div className="space-y-8">
-          <div className="text-center">
-            <Badge variant="outline" className="mb-4">
-              核心特性
-            </Badge>
-            <h3 className="text-2xl font-semibold mb-2">为什么选择 AI-Voca-2？</h3>
-            <p className="text-muted-foreground">
-              我们结合了最新的AI技术和用户友好的设计，为你打造最佳的词汇学习体验
-            </p>
-          </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {features.map((feature, index) => (
