@@ -144,82 +144,53 @@ export const HomePage: React.FC = () => {
 
   return (
     <>
-      <div className="min-h-screen flex flex-col">
+      <div className="max-w-6xl mx-auto space-y-12 pt-8 pb-4">
         {/* Hero Section */}
-        <div className="flex-1 flex flex-col justify-center max-w-6xl mx-auto px-4 py-12 space-y-16">
-          <div className="text-center space-y-8">
-            <div className="space-y-6">
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-gradient">
-                AI-Voca-2
-              </h1>
-              <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                基于人工智能的智能词汇学习助手
-              </p>
-            </div>
-            
-            <div className="space-y-4">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold">
-                让 AI 成为你的英语学习伙伴
-              </h2>
-              <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                采用先进的 Gemini 2.5 模型，为你提供深度、个性化的单词解释。
-                支持词形还原、智能收藏，助你高效构建个人词汇库。
-              </p>
-            </div>
-
-            <div className="pt-4">
-              <Button 
-                size="lg" 
-                className="text-lg md:text-xl px-8 md:px-12 py-6 md:py-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-                onClick={() => setShowAuthModal(true)}
-              >
-                立即开始学习
-              </Button>
-            </div>
+        <div className="text-center space-y-8">
+          
+          <div className="space-y-4">
+            <h2 className="text-3xl font-semibold">
+              让 AI 成为你的英语学习伙伴
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              采用先进的 Gemini 2.5 模型，为你提供深度、个性化的单词解释。
+              支持词形还原、智能收藏，助你高效构建个人词汇库。
+            </p>
           </div>
 
-          {/* Features Section */}
-          <div className="space-y-8">
-            <div className="text-center">
-              <h3 className="text-xl md:text-2xl font-semibold mb-4">核心特性</h3>
-              <p className="text-muted-foreground max-w-xl mx-auto">
-                我们结合了最新的AI技术和用户友好的设计，为你打造最佳的词汇学习体验
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-              {features.slice(0, 3).map((feature, index) => (
-                <Card key={index} className="hover-lift glass border-0 shadow-lg hover:shadow-xl transition-all duration-300">
-                  <CardHeader className="pb-4">
-                    <CardTitle className="flex flex-col items-center space-y-3 text-center">
-                      <div className={`p-3 rounded-xl bg-background/80 shadow-sm ${feature.color}`}>
-                        <feature.icon className="w-6 h-6" />
-                      </div>
-                      <span className="text-lg">{feature.title}</span>
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="pt-0">
-                    <p className="text-muted-foreground text-center leading-relaxed">{feature.description}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button 
+              size="lg" 
+              className="text-lg px-8 py-6"
+              onClick={() => setShowAuthModal(true)}
+            >
+              立即开始学习
+            </Button>
           </div>
         </div>
 
-        {/* Footer */}
-        <footer className="border-t border-border/50 bg-background/50 backdrop-blur-sm">
-          <div className="max-w-6xl mx-auto px-4 py-8">
-            <div className="text-center space-y-4">
-              <p className="text-sm text-muted-foreground">
-                © 2024 AI-Voca-2. 基于人工智能的智能词汇学习助手
-              </p>
-              <p className="text-xs text-muted-foreground/80">
-                Powered by Gemini 2.5 AI Model
-              </p>
-            </div>
+        {/* Features Section */}
+        <div className="space-y-8">
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {features.slice(0, 3).map((feature, index) => (
+              <Card key={index} className="hover-lift glass">
+                <CardHeader>
+                  <CardTitle className="flex items-center space-x-3">
+                    <div className={`p-2 rounded-lg bg-background/50 ${feature.color}`}>
+                      <feature.icon className="w-6 h-6" />
+                    </div>
+                    <span>{feature.title}</span>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground">{feature.description}</p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
-        </footer>
+        </div>
+
       </div>
 
       <AuthModal
