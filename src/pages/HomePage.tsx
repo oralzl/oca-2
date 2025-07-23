@@ -147,15 +147,6 @@ export const HomePage: React.FC = () => {
       <div className="max-w-6xl mx-auto space-y-12 pt-8 pb-4">
         {/* Hero Section */}
         <div className="text-center space-y-8">
-          <div className="flex items-center justify-center space-x-4">
-            <div className="w-20 h-20 bg-gradient-primary rounded-2xl flex items-center justify-center shadow-glow">
-              <Brain className="w-10 h-10 text-white" />
-            </div>
-            <div>
-              <h1 className="text-5xl font-bold text-gradient">AI-Voca-2</h1>
-              <p className="text-xl text-muted-foreground">基于人工智能的智能词汇学习助手</p>
-            </div>
-          </div>
           
           <div className="space-y-4">
             <h2 className="text-3xl font-semibold">
