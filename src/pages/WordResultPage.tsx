@@ -105,40 +105,6 @@ export const WordResultPage: React.FC<WordResultPageProps> = () => {
   if (isSearching) {
     return (
       <div className="w-full h-full flex flex-col">
-        {/* Top Bar for Desktop */}
-        {isDesktop && (
-          <div className="sticky top-0 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border/40">
-            <div className="flex items-center justify-between px-6 py-4">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={handleBack}
-                className="flex items-center space-x-2"
-              >
-                <ArrowLeft className="w-4 h-4" />
-                <span>返回</span>
-              </Button>
-              
-              <div className="flex-1 max-w-md mx-8">
-                <div className="relative animate-scale-in">
-                  <EnhancedSearchInput
-                    value={searchTerm}
-                    onChange={(value) => setSearchTerm(value)}
-                    onKeyPress={handleKeyPress}
-                    onSearch={handleSearch}
-                    placeholder="输入英文单词..."
-                    disabled={isSearching}
-                    className="w-full"
-                    compact={true}
-                  />
-                </div>
-              </div>
-              
-              <div className="w-20"></div>
-            </div>
-          </div>
-        )}
-
         {/* Loading Content */}
         <div className="flex-1 flex items-center justify-center p-8">
           <div className="text-center space-y-4">
