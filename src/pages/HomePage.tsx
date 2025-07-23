@@ -144,53 +144,53 @@ export const HomePage: React.FC = () => {
 
   return (
     <>
-      <div className="max-w-6xl mx-auto space-y-12 pt-8 pb-4">
-        {/* Hero Section */}
-        <div className="text-center space-y-8">
-          
-          <div className="space-y-4">
-            <h2 className="text-3xl font-semibold">
-              让 AI 成为你的英语学习伙伴
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              采用先进的 Gemini 2.5 模型，为你提供深度、个性化的单词解释。
-              支持词形还原、智能收藏，助你高效构建个人词汇库。
-            </p>
+      <div className="min-h-screen flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl w-full space-y-12">
+          {/* Hero Section */}
+          <div className="text-center space-y-8">
+            <div className="space-y-6">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gradient">
+                AI-Voca-2
+              </h1>
+              <p className="text-xl sm:text-2xl text-muted-foreground">
+                智能词汇学习助手
+              </p>
+              <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                采用先进的 Gemini 2.5 模型，为你提供深度、个性化的单词解释。
+                支持词形还原、智能收藏，助你高效构建个人词汇库。
+              </p>
+            </div>
+
+            <div className="pt-4">
+              <Button 
+                size="lg" 
+                className="text-lg px-10 py-6 h-14 font-semibold hover-scale transition-all duration-300"
+                onClick={() => setShowAuthModal(true)}
+              >
+                立即开始学习
+              </Button>
+            </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              size="lg" 
-              className="text-lg px-8 py-6"
-              onClick={() => setShowAuthModal(true)}
-            >
-              立即开始学习
-            </Button>
-          </div>
-        </div>
-
-        {/* Features Section */}
-        <div className="space-y-8">
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Features Section */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8">
             {features.slice(0, 3).map((feature, index) => (
-              <Card key={index} className="hover-lift glass">
-                <CardHeader>
-                  <CardTitle className="flex items-center space-x-3">
-                    <div className={`p-2 rounded-lg bg-background/50 ${feature.color}`}>
-                      <feature.icon className="w-6 h-6" />
-                    </div>
-                    <span>{feature.title}</span>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">{feature.description}</p>
+              <Card key={index} className="hover-lift glass text-center border-0 shadow-lg">
+                <CardContent className="p-6 flex flex-col items-center space-y-4">
+                  <div className={`p-4 rounded-full bg-background/50 ${feature.color}`}>
+                    <feature.icon className="w-8 h-8" />
+                  </div>
+                  <div className="space-y-2">
+                    <h3 className="font-semibold text-lg">{feature.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {feature.description}
+                    </p>
+                  </div>
                 </CardContent>
               </Card>
             ))}
           </div>
         </div>
-
       </div>
 
       <AuthModal
