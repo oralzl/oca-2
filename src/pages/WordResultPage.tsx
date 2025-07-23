@@ -340,139 +340,171 @@ export const WordResultPage: React.FC<WordResultPageProps> = () => {
 
   // Mobile layout
   return (
-    <div className="w-full max-w-2xl mx-auto space-y-8 p-4 pt-8 pb-32">
-      {/* Search Result */}
-      <Card className="shadow-medium border-0 animate-slide-up">
-        <CardHeader className="pb-4">
-          <div className="flex flex-col space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0">
-            <div className="min-w-0 flex-1">
-              <div className="flex flex-col space-y-2 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-3">
-                <CardTitle className="text-xl sm:text-2xl font-bold break-words">
-                  {mockResult.word}
-                </CardTitle>
-                <Badge variant="secondary" className="text-sm w-fit">
-                  {mockResult.partOfSpeech}
-                </Badge>
-              </div>
-              <div className="flex flex-col space-y-2 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-3 mt-2">
-                <span className="text-muted-foreground font-mono text-sm break-all">
-                  {mockResult.pronunciation}
-                </span>
-                <Button variant="ghost" size="sm" className="w-fit">
-                  <Volume2 className="w-4 h-4" />
-                </Button>
-              </div>
-            </div>
-            <div className="flex items-center space-x-2 shrink-0">
-              <Button variant="outline" size="sm" className="text-xs">
-                <Star className="w-4 h-4 sm:mr-2" />
-                <span className="hidden sm:inline">收藏</span>
-              </Button>
-              <Button variant="ghost" size="sm">
-                <RotateCcw className="w-4 h-4" />
-              </Button>
-            </div>
-          </div>
-        </CardHeader>
-
-        <CardContent className="space-y-6">
-          {/* Definition */}
-          <div className="space-y-3">
-            <div className="flex items-center space-x-2">
-              <FileText className="w-5 h-5 text-primary" />
-              <h3 className="font-semibold">释义</h3>
-            </div>
-            <p className="text-lg leading-relaxed bg-muted/50 p-4 rounded-lg">
-              {mockResult.definition}
-            </p>
-            <p className="text-lg leading-relaxed bg-muted/50 p-4 rounded-lg">
-              {mockResult.simpleExplanation}
-            </p>
-          </div>
-
-          <Separator />
-
-          {/* Examples */}
-          <div className="space-y-3">
-            <div className="flex items-center space-x-2">
-              <Languages className="w-5 h-5 text-primary" />
-              <h3 className="font-semibold">例句</h3>
-            </div>
-            <div className="space-y-4">
-              {mockResult.examples.map((example, index) => (
-                <div key={index} className="bg-muted/30 p-4 rounded-lg space-y-2">
-                  <p className="font-medium">{example.english}</p>
-                  <p className="text-muted-foreground">{example.chinese}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <Separator />
-
-          {/* Vocabulary Extensions & Learning Aids */}
-          <div className="space-y-6">
-            {/* Synonyms & Antonyms */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <h4 className="font-semibold text-success">同义词</h4>
-                <div className="flex flex-wrap gap-2">
-                  {mockResult.synonyms.map((synonym, index) => (
-                    <Badge key={index} variant="outline" className="text-success border-success/20">
-                      {synonym}
+    <div className="w-full h-full flex flex-col">
+      {/* Main Content */}
+      <div className="flex-1 overflow-y-auto">
+        <div className="w-full max-w-2xl mx-auto space-y-8 p-4 pt-8 pb-20">
+          {/* Search Result */}
+          <Card className="shadow-medium border-0 animate-slide-up">
+            <CardHeader className="pb-4">
+              <div className="flex flex-col space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0">
+                <div className="min-w-0 flex-1">
+                  <div className="flex flex-col space-y-2 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-3">
+                    <CardTitle className="text-xl sm:text-2xl font-bold break-words">
+                      {mockResult.word}
+                    </CardTitle>
+                    <Badge variant="secondary" className="text-sm w-fit">
+                      {mockResult.partOfSpeech}
                     </Badge>
+                  </div>
+                  <div className="flex flex-col space-y-2 sm:flex-row sm:items-center sm:space-y-0 sm:space-x-3 mt-2">
+                    <span className="text-muted-foreground font-mono text-sm break-all">
+                      {mockResult.pronunciation}
+                    </span>
+                    <Button variant="ghost" size="sm" className="w-fit">
+                      <Volume2 className="w-4 h-4" />
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </CardHeader>
+
+            <CardContent className="space-y-6">
+              {/* Definition */}
+              <div className="space-y-3">
+                <div className="flex items-center space-x-2">
+                  <FileText className="w-5 h-5 text-primary" />
+                  <h3 className="font-semibold">释义</h3>
+                </div>
+                <p className="text-lg leading-relaxed bg-muted/50 p-4 rounded-lg">
+                  {mockResult.definition}
+                </p>
+                <p className="text-lg leading-relaxed bg-muted/50 p-4 rounded-lg">
+                  {mockResult.simpleExplanation}
+                </p>
+              </div>
+
+              <Separator />
+
+              {/* Examples */}
+              <div className="space-y-3">
+                <div className="flex items-center space-x-2">
+                  <Languages className="w-5 h-5 text-primary" />
+                  <h3 className="font-semibold">例句</h3>
+                </div>
+                <div className="space-y-4">
+                  {mockResult.examples.map((example, index) => (
+                    <div key={index} className="bg-muted/30 p-4 rounded-lg space-y-2">
+                      <p className="font-medium">{example.english}</p>
+                      <p className="text-muted-foreground">{example.chinese}</p>
+                    </div>
                   ))}
                 </div>
               </div>
-              <div className="space-y-2">
-                <h4 className="font-semibold text-destructive">反义词</h4>
-                <div className="flex flex-wrap gap-2">
-                  {mockResult.antonyms.map((antonym, index) => (
-                    <Badge key={index} variant="outline" className="text-destructive border-destructive/20">
-                      {antonym}
-                    </Badge>
-                  ))}
+
+              <Separator />
+
+              {/* Vocabulary Extensions & Learning Aids */}
+              <div className="space-y-6">
+                {/* Synonyms & Antonyms */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <h4 className="font-semibold text-success">同义词</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {mockResult.synonyms.map((synonym, index) => (
+                        <Badge key={index} variant="outline" className="text-success border-success/20">
+                          {synonym}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <h4 className="font-semibold text-destructive">反义词</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {mockResult.antonyms.map((antonym, index) => (
+                        <Badge key={index} variant="outline" className="text-destructive border-destructive/20">
+                          {antonym}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <Separator />
+
+                {/* Etymology */}
+                <div className="space-y-2">
+                  <div className="flex items-center space-x-2">
+                    <BookOpen className="w-4 h-4 text-accent-warm" />
+                    <h4 className="font-semibold">词源</h4>
+                  </div>
+                  <p className="text-muted-foreground bg-accent-warm/5 p-3 rounded-lg">
+                    {mockResult.etymology}
+                  </p>
+                </div>
+
+                {/* Memory Tips */}
+                <div className="space-y-2">
+                  <div className="flex items-center space-x-2">
+                    <Lightbulb className="w-4 h-4 text-accent-warm" />
+                    <h4 className="font-semibold">记忆技巧</h4>
+                  </div>
+                  <p className="text-muted-foreground bg-accent-warm/5 p-3 rounded-lg">
+                    {mockResult.memoryTips}
+                  </p>
                 </div>
               </div>
-            </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
 
-            <Separator />
-
-            {/* Etymology */}
-            <div className="space-y-2">
-              <div className="flex items-center space-x-2">
-                <BookOpen className="w-4 h-4 text-accent-warm" />
-                <h4 className="font-semibold">词源</h4>
-              </div>
-              <p className="text-muted-foreground bg-accent-warm/5 p-3 rounded-lg">
-                {mockResult.etymology}
-              </p>
-            </div>
-
-            {/* Memory Tips */}
-            <div className="space-y-2">
-              <div className="flex items-center space-x-2">
-                <Lightbulb className="w-4 h-4 text-accent-warm" />
-                <h4 className="font-semibold">记忆技巧</h4>
-              </div>
-              <p className="text-muted-foreground bg-accent-warm/5 p-3 rounded-lg">
-                {mockResult.memoryTips}
-              </p>
-            </div>
-          </div>
-
-          {/* Actions */}
-          <div className="flex items-center justify-between pt-4 border-t">
-            <div className="text-sm text-muted-foreground">
-              由 AI 生成 • 查询时间: {new Date().toLocaleTimeString()}
-            </div>
-            <Button variant="ghost" size="sm">
-              <Copy className="w-4 h-4 mr-2" />
-              复制结果
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+      {/* Mobile Bottom Toolbar */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-lg border-t border-border/40 px-4 py-3">
+        <div className="flex items-center justify-around max-w-2xl mx-auto">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={handleBack}
+            className="flex flex-col items-center space-y-1 px-3 py-2"
+          >
+            <ArrowLeft className="w-5 h-5" />
+            <span className="text-xs">返回</span>
+          </Button>
+          
+          <Button
+            variant="ghost"
+            size="sm"
+            className="flex flex-col items-center space-y-1 px-3 py-2"
+          >
+            <Star className="w-5 h-5" />
+            <span className="text-xs">收藏</span>
+          </Button>
+          
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => window.location.reload()}
+            className="flex flex-col items-center space-y-1 px-3 py-2"
+          >
+            <RotateCcw className="w-5 h-5" />
+            <span className="text-xs">重试</span>
+          </Button>
+          
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => {
+              // Copy word result to clipboard
+              navigator.clipboard.writeText(`${mockResult.word} - ${mockResult.definition}`);
+            }}
+            className="flex flex-col items-center space-y-1 px-3 py-2"
+          >
+            <Copy className="w-5 h-5" />
+            <span className="text-xs">复制</span>
+          </Button>
+        </div>
+      </div>
     </div>
   );
 };
