@@ -65,6 +65,7 @@ export const WordResultPage: React.FC<WordResultPageProps> = () => {
     if (!term.trim()) return;
     
     navigate(`/word/${encodeURIComponent(term)}`);
+    setSearchTerm(''); // Clear search input after navigation
   };
 
   const handleSearch = async () => {
