@@ -466,29 +466,26 @@ export const WordResultPage: React.FC<WordResultPageProps> = () => {
             variant="ghost"
             size="sm"
             onClick={handleBack}
-            className="flex flex-col items-center space-y-1 px-3 py-2"
+            className="flex items-center justify-center p-3"
           >
             <ArrowLeft className="w-5 h-5" />
-            <span className="text-xs">返回</span>
           </Button>
           
           <Button
             variant="ghost"
             size="sm"
-            className="flex flex-col items-center space-y-1 px-3 py-2"
+            className="flex items-center justify-center p-3"
           >
             <Star className="w-5 h-5" />
-            <span className="text-xs">收藏</span>
           </Button>
           
           <Button
             variant="ghost"
             size="sm"
             onClick={() => window.location.reload()}
-            className="flex flex-col items-center space-y-1 px-3 py-2"
+            className="flex items-center justify-center p-3"
           >
             <RotateCcw className="w-5 h-5" />
-            <span className="text-xs">重试</span>
           </Button>
           
           <Button
@@ -498,10 +495,9 @@ export const WordResultPage: React.FC<WordResultPageProps> = () => {
               // Copy word result to clipboard
               navigator.clipboard.writeText(`${mockResult.word} - ${mockResult.definition}`);
             }}
-            className="flex flex-col items-center space-y-1 px-3 py-2"
+            className="flex items-center justify-center p-3"
           >
             <Copy className="w-5 h-5" />
-            <span className="text-xs">复制</span>
           </Button>
         </div>
       </div>
