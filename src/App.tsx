@@ -19,8 +19,8 @@ const App = () => (
       <TooltipProvider>
         <BrowserRouter>
           <Routes>
+            <Route path="/" element={<HomePage />} />
             <Route path="/" element={<AppLayout />}>
-              <Route index element={<HomePage />} />
               <Route path="search" element={<SearchPage />} />
               <Route path="word/:word" element={<WordResultPage />} />
               <Route path="favorites" element={<FavoritesPage />} />
