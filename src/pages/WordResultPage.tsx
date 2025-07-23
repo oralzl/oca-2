@@ -112,16 +112,9 @@ export const WordResultPage: React.FC<WordResultPageProps> = () => {
               <Loader2 className="w-12 h-12 text-primary animate-spin mx-auto" />
               <div className="absolute inset-0 w-12 h-12 border-2 border-primary/20 rounded-full animate-pulse mx-auto"></div>
             </div>
-            <div className="space-y-2">
-              <h3 className="text-lg font-medium">正在查询单词</h3>
-              <p className="text-muted-foreground">
-                正在为您查找 "{word}" 的详细信息...
-              </p>
-            </div>
-            <div className="flex items-center justify-center space-x-1">
-              <Sparkles className="w-4 h-4 text-primary animate-pulse" />
-              <span className="text-sm text-muted-foreground">AI 正在分析</span>
-            </div>
+            <p className="text-muted-foreground">
+              正在查询单词...
+            </p>
           </div>
         </div>
       </div>
