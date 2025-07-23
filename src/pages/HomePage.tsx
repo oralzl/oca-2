@@ -166,14 +166,6 @@ export const HomePage: React.FC = () => {
             >
               立即开始学习
             </Button>
-            <Button 
-              size="lg" 
-              variant="outline"
-              className="text-lg px-8 py-6"
-              onClick={() => setShowAuthModal(true)}
-            >
-              了解更多
-            </Button>
           </div>
         </div>
 
