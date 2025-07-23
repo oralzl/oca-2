@@ -31,7 +31,7 @@ const App = () => (
         <Toaster />
       </TooltipProvider>
     </AuthProvider>
-  </TooltipProvider>
+  </QueryClientProvider>
 );
 
 export default App;
