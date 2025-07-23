@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AppLayout } from "./components/layout/AppLayout";
 import { HomePage } from "./pages/HomePage";
 import { SearchPage } from "./pages/SearchPage";
+import { WordResultPage } from "./pages/WordResultPage";
 import { FavoritesPage } from "./pages/FavoritesPage";
 import NotFound from "./pages/NotFound";
 
@@ -17,6 +18,7 @@ const App = () => (
           <Route path="/" element={<AppLayout />}>
             <Route index element={<HomePage />} />
             <Route path="search" element={<SearchPage />} />
+            <Route path="word/:word" element={<WordResultPage />} />
             <Route path="favorites" element={<FavoritesPage />} />
           </Route>
           <Route path="*" element={<NotFound />} />
