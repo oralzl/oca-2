@@ -159,18 +159,18 @@ export const FavoritesPage: React.FC = () => {
   );
 
   return (
-    <div className="max-w-6xl mx-auto space-y-8">
+    <div className="max-w-6xl mx-auto space-y-8 pt-8 pb-4">
       {/* Header */}
-      <div className="flex flex-col space-y-4">
-        <div className="flex items-center justify-between">
-          <div>
+      <div className="flex flex-col space-y-6">
+        <div className="flex items-center justify-between pt-2 pb-4">
+          <div className="space-y-2">
             <h1 className="text-3xl font-bold text-gradient">我的收藏</h1>
-            <p className="text-muted-foreground mt-1">
+            <p className="text-muted-foreground">
               管理你收藏的单词，建立个人词汇库
             </p>
           </div>
           <div className="flex items-center space-x-2">
-            <Badge variant="outline" className="px-3 py-1">
+            <Badge variant="outline" className="px-4 py-2">
               <Star className="w-3 h-3 mr-1" />
               {mockFavorites.length} 个单词
             </Badge>
