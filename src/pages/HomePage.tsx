@@ -152,9 +152,6 @@ export const HomePage: React.FC = () => {
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gradient">
                 AI-Voca-2
               </h1>
-              <p className="text-xl sm:text-2xl text-muted-foreground">
-                智能词汇学习助手
-              </p>
               <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
                 采用先进的 Gemini 2.5 模型，为你提供深度、个性化的单词解释。
                 支持词形还原、智能收藏，助你高效构建个人词汇库。
