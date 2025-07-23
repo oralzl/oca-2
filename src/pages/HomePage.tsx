@@ -191,21 +191,6 @@ export const HomePage: React.FC = () => {
           </div>
         </div>
 
-        {/* CTA Section */}
-        <div className="text-center space-y-6 p-8 rounded-2xl bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10">
-          <h3 className="text-2xl font-semibold">准备开始你的学习之旅？</h3>
-          <p className="text-muted-foreground max-w-xl mx-auto">
-            加入 AI-Voca-2，体验 AI 驱动的智能词汇学习。
-            立即注册，开启你的英语学习新篇章。
-          </p>
-          <Button 
-            size="lg"
-            className="text-lg px-8 py-6"
-            onClick={() => setShowAuthModal(true)}
-          >
-            立即注册
-          </Button>
-        </div>
       </div>
 
       <AuthModal
